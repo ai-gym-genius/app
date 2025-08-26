@@ -1,0 +1,198 @@
+[
+    {
+        "id": 1,
+        "name": "Bench Press",
+        "description": "A compound exercise that targets the chest, shoulders, and triceps.",
+        "muscleGroup": ["Chest"],
+        "imagePath": "assets/exercise_pictures/bench_press.webp"
+    },
+    {
+        "id": 2,
+        "name": "Dumbbell Press",
+        "description": "A chest exercise performed with dumbbells to build strength and muscle.",
+        "muscleGroup": ["Chest"],
+        "imagePath": "assets/exercise_pictures/dumbbell_press.webp"
+    },
+    {
+        "id": 3,
+        "name": "Cable Flies",
+        "description": "An isolation exercise that targets the chest muscles using a cable machine.",
+        "muscleGroup": ["Chest"],
+        "imagePath": "assets/exercise_pictures/cable_flies.webp"
+    },
+    {
+        "id": 4,
+        "name": "Pull-Up",
+        "description": "A bodyweight exercise that targets the back, shoulders, and arms.",
+        "muscleGroup": ["Back"],
+        "imagePath": "assets/exercise_pictures/pull_up.webp"
+    },
+    {
+        "id": 5,
+        "name": "DeadLift",
+        "description": "A compound lift that works the entire posterior chain, including the back, glutes, and hamstrings.",
+        "muscleGroup": ["Back"],
+        "imagePath": "assets/exercise_pictures/deadlift.webp"
+    },
+    {
+        "id": 6,
+        "name": "Row",
+        "description": "A back exercise that can be performed with a barbell, dumbbell, or machine to target the lats and upper back.",
+        "muscleGroup": ["Back"],
+        "imagePath": "assets/exercise_pictures/row.webp"
+    },
+    {
+        "id": 7,
+        "name": "Pull-Down",
+        "description": "A machine-based exercise that targets the latissimus dorsi.",
+        "muscleGroup": ["Back"],
+        "imagePath": "assets/exercise_pictures/pull_down.webp"
+    },
+    {
+        "id": 8,
+        "name": "T-Bar Row",
+        "description": "A back exercise performed with a T-bar row machine or barbell to target the middle back.",
+        "muscleGroup": ["Back"],
+        "imagePath": "assets/exercise_pictures/tbar_row.webp"
+    },
+    {
+        "id": 9,
+        "name": "Straight Arm Pulldown",
+        "description": "An isolation exercise for the lats performed with a cable machine.",
+        "muscleGroup": ["Back"],
+        "imagePath": "assets/exercise_pictures/straight_arm_pulldown.webp"
+    },
+    {
+        "id": 10,
+        "name": "Squat",
+        "description": "A compound lower body exercise that targets the quads, hamstrings, and glutes.",
+        "muscleGroup": ["Legs"],
+        "imagePath": "assets/exercise_pictures/squat.webp"
+    },
+    {
+        "id": 11,
+        "name": "Leg-Extensions",
+        "description": "An isolation exercise that targets the quadriceps using a leg extension machine.",
+        "muscleGroup": ["Legs"],
+        "imagePath": "assets/exercise_pictures/leg_ext.webp"
+    },
+    {
+        "id": 12,
+        "name": "Leg-Press",
+        "description": "A machine-based exercise that targets the quads, hamstrings, and glutes.",
+        "muscleGroup": ["Legs"],
+        "imagePath": "assets/exercise_pictures/leg_press.webp"
+    },
+    {
+        "id": 13,
+        "name": "Leg-Curls",
+        "description": "An isolation exercise that targets the hamstrings using a leg curl machine.",
+        "muscleGroup": ["Legs"],
+        "imagePath": ""
+    },
+    {
+        "id": 14,
+        "name": "Bulgarian Split Squats",
+        "description": "A unilateral leg exercise that targets the quads, glutes, and hamstrings.",
+        "muscleGroup": ["Legs"],
+        "imagePath": ""
+    },
+    {
+        "id": 15,
+        "name": "Barbell Curls",
+        "description": "An isolation exercise that targets the biceps using a barbell.",
+        "muscleGroup": ["Biceps"],
+        "imagePath": ""
+    },
+    {
+        "id": 16,
+        "name": "Hammer Curls",
+        "description": "A bicep exercise performed with dumbbells, targeting the brachialis and forearms.",
+        "muscleGroup": ["Biceps"],
+        "imagePath": ""
+    },
+    {
+        "id": 17,
+        "name": "Dumbbell Curls",
+        "description": "Basic variation of curls that targets the biceps.",
+        "muscleGroup": ["Biceps"],
+        "imagePath": "assets/exercise_pictures/dumbbell_curls.webp"
+    },
+    {
+        "id": 18,
+        "name": "Preacher Curls",
+        "description": "An isolation bicep exercise performed on a preacher bench to minimize momentum.",
+        "muscleGroup": ["Biceps"],
+        "imagePath": ""
+    },
+    {
+        "id": 19,
+        "name": "Concentration Curls",
+        "description": "An isolation bicep exercise performed seated with a dumbbell.",
+        "muscleGroup": ["Biceps"],
+        "imagePath": ""
+    },
+    {
+        "id": 20,
+        "name": "Push Down Machine",
+        "description": "A tricep isolation exercise performed using a cable machine.",
+        "muscleGroup": ["Triceps"],
+        "imagePath": ""
+    },
+    {
+        "id": 21,
+        "name": "Overhead Barbell Extension",
+        "description": "A tricep exercise performed with a barbell overhead to target the long head of the tricep.",
+        "muscleGroup": ["Triceps"],
+        "imagePath": ""
+    },
+    {
+        "id": 22,
+        "name": "Overhead Dumbbell Extension",
+        "description": "A tricep exercise performed with a dumbbell overhead to target the long head of the tricep.",
+        "muscleGroup": ["Triceps"],
+        "imagePath": ""
+    },
+    {
+        "id": 23,
+        "name": "Close Grip Bench Press",
+        "description": "A compound exercise that targets the triceps and chest.",
+        "muscleGroup": ["Chest", "Triceps"],
+        "imagePath": ""
+    },
+    {
+        "id": 24,
+        "name": "Shoulder Press",
+        "description": "A shoulder exercise performed with dumbbells to target the deltoids.",
+        "muscleGroup": ["Shoulders"],
+        "imagePath": "assets/exercise_pictures/shoulder_press.webp"
+    },
+    {
+        "id": 25,
+        "name": "Front Raises",
+        "description": "An isolation exercise that targets the front deltoids.",
+        "muscleGroup": ["Shoulders"],
+        "imagePath": ""
+    },
+    {
+        "id": 26,
+        "name": "Lateral Raise",
+        "description": "An isolation exercise that targets the lateral deltoids.",
+        "muscleGroup": ["Shoulders"],
+        "imagePath": ""
+    },
+    {
+        "id": 27,
+        "name": "Cable Pulls",
+        "description": "A shoulder exercise performed with a cable machine to target the rear deltoids.",
+        "muscleGroup": ["Shoulders"],
+        "imagePath": ""
+    },
+    {
+        "id": 28,
+        "name": "Dips",
+        "description": "A compound exercise that targets the chest and triceps.",
+        "muscleGroup": ["Chest", "Triceps"],
+        "imagePath": "assets/exercise_pictures/dips.webp"
+    }
+]
