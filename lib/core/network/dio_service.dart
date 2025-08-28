@@ -4,14 +4,18 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// A singleton service for making HTTP requests using Dio with persistent 
+/// cookies.
 class DioService {
+  /// Factory constructor for singleton pattern.
   factory DioService() {
     return _instance;
   }
 
-  // Private constructor for singleton pattern
+  /// Private constructor for singleton pattern.
   DioService._privateConstructor();
 
+  /// Initializes the Dio instance with the base URL, timeouts, and headers.
   Future<void> init() async {
     _dio = Dio(BaseOptions(
         baseUrl: 'http://api.xn--b1ab5acc.site',
@@ -56,7 +60,7 @@ class DioService {
   /// Performs a POST request.
   Future<dynamic> post(String endpoint, {dynamic data}) async {
     try {
-      final response = await _dio.post(endpoint, data: data);
+      final response = await _dio.post<dynamic>(endpoint, data: data);
       return response.data;
     } on DioException catch (e) {
       throw _handleError(e);
@@ -66,7 +70,7 @@ class DioService {
   /// Performs a PUT request.
   Future<dynamic> put(String endpoint, {dynamic data}) async {
     try {
-      final response = await _dio.put(endpoint, data: data);
+      final response = await _dio.put<dynamic>(endpoint, data: data);
       return response.data;
     } on DioException catch (e) {
       throw _handleError(e);
@@ -76,7 +80,7 @@ class DioService {
   /// Performs a DELETE request.
   Future<dynamic> delete(String endpoint) async {
     try {
-      final response = await _dio.delete(endpoint);
+      final response = await _dio.delete<dynamic>(endpoint);
       return response.data;
     } on DioException catch (e) {
       throw _handleError(e);
@@ -109,6 +113,7 @@ ApiException _handleError(DioException e) {
     case DioExceptionType.connectionError:
       errorMessage = 'No internet connection.';
     case DioExceptionType.unknown:
+    // reason: not quite important to handle all cases.
     // ignore: no_default_cases
     default:
       errorMessage = 'An unknown error occurred.';
@@ -119,16 +124,22 @@ ApiException _handleError(DioException e) {
 
 /// A custom exception class for API errors.
 class ApiException implements Exception {
+  /// Constructor for the [ApiException] class.
   ApiException(this.message);
+
+  /// The error message.
   final String message;
 
   @override
   String toString() => message;
 }
 
+/// A custom cookie interceptor that saves cookies to the cookie jar.
 class MyFuckingCookieInterceptor extends PersistCookieJar {
+  /// Constructor for the [MyFuckingCookieInterceptor] class.
   MyFuckingCookieInterceptor({super.storage});
 
+  /// Saves cookies from the response to the cookie jar.
   @override
   Future<void> saveFromResponse(Uri uri, List<Cookie> cookies) {
     final cleaned = cookies.map((c) {

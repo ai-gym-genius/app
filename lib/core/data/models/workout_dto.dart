@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'dart:convert';
 import 'dart:math';
 
@@ -8,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:gym_genius/core/data/models/exercise_dto.dart';
 import 'package:gym_genius/core/domain/entities/workout_entity.dart';
 
+/// WorkoutDTO.
 class WorkoutDTO {
   final int id;
   final Duration duration; // In seconds

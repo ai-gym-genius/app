@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
+/// Helpers for warnings popups.
 class Warnings {
+  /// no-doc.
   static void showAIReviewWarning(BuildContext context) {
     showCupertinoDialog<dynamic>(
       barrierDismissible: true,
@@ -20,6 +22,7 @@ class Warnings {
     );
   }
 
+  /// no-doc.
   static void showAlreadyHasExerciseWarning(BuildContext context) {
     showCupertinoDialog<dynamic>(
       barrierDismissible: true,
@@ -39,6 +42,7 @@ class Warnings {
     );
   }
 
+  /// no-doc.
   static void showSubmitEmptyWarning(BuildContext context) {
     showCupertinoDialog<dynamic>(
       context: context,
@@ -57,8 +61,9 @@ class Warnings {
     );
   }
 
+  /// no-doc.
   static void showSubmitIncompleteWarning(BuildContext context) {
-    showCupertinoDialog(
+    showCupertinoDialog<void>(
       context: context,
       builder: (context) => CupertinoAlertDialog(
         title: const Text('Empty Exercises'),
@@ -75,8 +80,9 @@ class Warnings {
     );
   }
 
+  /// no-doc.
   static void showWritingFailureWarning(BuildContext context) {
-    showCupertinoDialog(
+    showCupertinoDialog<void>(
       context: context,
       builder: (context) => CupertinoAlertDialog(
         title: const Text('Failed to Write'),

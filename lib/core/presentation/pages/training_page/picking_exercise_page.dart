@@ -301,7 +301,6 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
       // TODO: Fix taps on focused.
       child: GestureDetector(
         onTap: () {
-          print('Added ex to bloc');
           bloc.add(AddExercise(exerciseInfo));
         },
 

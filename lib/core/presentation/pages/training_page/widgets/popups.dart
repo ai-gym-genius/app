@@ -182,8 +182,6 @@ class _TrainingSummaryCard extends StatelessWidget {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                // ─── Icon / Activity indicator ───
-                                // Fixed box guarantees the widget keeps the same footprint
                                 SizedBox(
                                   width: 36,
                                   height: 36,

@@ -63,8 +63,6 @@ void main() {
           });
         }
       }
-
-      print(await txn.query('workouts'));
     });
 
     return workout;
