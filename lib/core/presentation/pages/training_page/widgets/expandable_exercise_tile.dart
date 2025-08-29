@@ -86,9 +86,7 @@ class _ExpandableExerciseTileState extends State<ExpandableExerciseTile> {
               BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                 child: Container(
-                  color: context.colors.surfaceVariant.withAlpha(
-                    150,
-                  ),
+                  color: context.colors.surfaceVariant.withAlpha(150),
                 ),
               ),
               // Content
