@@ -1,6 +1,7 @@
 import 'package:gym_genius/core/domain/entities/exercise_info_entity.dart';
 import 'package:gym_genius/core/domain/repositories/ex_infos_repository.dart';
 
+/// Service for modifying user's copy of json that contains ExerciseInfos.
 class ExInfosRepositoryImpl implements ExInfosRepository {
   @override
   Future<List<ExerciseInfoEntity>> loadFavorites() {

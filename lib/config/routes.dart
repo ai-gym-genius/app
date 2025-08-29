@@ -6,13 +6,20 @@ import 'package:gym_genius/core/presentation/pages/training_page/start_workout_p
 import 'package:gym_genius/core/presentation/pages/training_page/training_process_page.dart';
 import 'package:gym_genius/theme/context_getters.dart';
 
+/// Defines the application's route mappings.
 final Map<String, Widget Function(dynamic context)> routes = {
   '/': (context) => const TabBarPage(),
   '/training_process': (context) => const TrainingProcessPage(),
   '/auth': (context) => const AuthPage(),
 };
 
+
+
+
+/// A [StatelessWidget] that displays the main tab bar navigation for the app.
 class TabBarPage extends StatelessWidget {
+  
+  /// Creates a [TabBarPage] widget.
   const TabBarPage({super.key});
 
   @override

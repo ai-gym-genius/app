@@ -1,3 +1,4 @@
+// This code is mostly fucking shit and should be rewritten.
 import 'package:gym_genius/core/data/datasources/local/services/workout_database_provider.dart';
 import 'package:gym_genius/core/data/models/exercise_dto.dart';
 import 'package:gym_genius/core/data/models/exercise_info_dto.dart';
@@ -202,10 +203,11 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
         final wid = w['id']! as int;
 
         final exercises = <ExerciseDTO>[
-          for (final ex in (exercisesByWorkout[wid] ?? const []))
+          for (final Map<String, Object?> ex
+              in (exercisesByWorkout[wid] ?? const []))
             ExerciseDTO(
-              exerciseInfo: infosMap[ex['exercise_info_id'] as int]!,
-              sets: setsByExercise[ex['id'] as int] ?? const [],
+              exerciseInfo: infosMap[ex['exercise_info_id']! as int]!,
+              sets: setsByExercise[ex['id']! as int] ?? const [],
             ),
         ];
 

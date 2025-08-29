@@ -5,12 +5,19 @@ import 'package:gym_genius/core/data/models/workout_dto.dart';
 import 'package:gym_genius/core/domain/entities/workout_entity.dart';
 import 'package:gym_genius/core/domain/repositories/workout_repository.dart';
 
+/// CRUD for workouts and some AI related methods.
 class WorkoutRepositoryImpl implements WorkoutRepository {
+  /// Creates a [WorkoutRepositoryImpl] with the given local and remote 
+  /// datasources.
   WorkoutRepositoryImpl(
     this.localWorkoutDatasource,
     this.remoteWorkoutDatasource,
   );
+
+  /// Handles local db.
   final LocalWorkoutDatasource localWorkoutDatasource;
+
+  /// Handles network operation.
   final RemoteWorkoutDatasource remoteWorkoutDatasource;
 
   @override
@@ -34,8 +41,8 @@ class WorkoutRepositoryImpl implements WorkoutRepository {
   @override
   Future<void> saveWorkout(WorkoutEntity entity) async {
     final dto = WorkoutDTO.fromEntity(entity);
-    localWorkoutDatasource.saveWorkout(dto);
-    remoteWorkoutDatasource.saveWorkout(dto);
+    await localWorkoutDatasource.saveWorkout(dto);
+    await remoteWorkoutDatasource.saveWorkout(dto);
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:gym_genius/core/data/datasources/mock_data.dart';
 import 'package:gym_genius/core/domain/entities/workout_entity.dart';
 import 'package:gym_genius/core/domain/repositories/workout_repository.dart';
 
+/// Mocks workout repository.
 class MockWorkoutRepositoryImpl implements WorkoutRepository {
   @override
   Future<WorkoutEntity?> fetchWorkout(int workoutId) {

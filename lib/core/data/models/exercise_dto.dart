@@ -1,17 +1,19 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:gym_genius/core/data/models/exercise_info_dto.dart';
 import 'package:gym_genius/core/data/models/exercise_set_dto.dart';
 import 'package:gym_genius/core/domain/entities/exercise_entity.dart';
 
+/// DTO for exercises.
 class ExerciseDTO {
+  /// no-doc.
   ExerciseDTO({
     required this.exerciseInfo,
     this.sets = const [],
   });
 
+  /// Generates random exercise.
   factory ExerciseDTO.fake() {
     final rand = Random();
 
@@ -30,6 +32,7 @@ class ExerciseDTO {
     );
   }
 
+  /// no-doc.
   factory ExerciseDTO.fromEntity(ExerciseEntity entity) {
     return ExerciseDTO(
       exerciseInfo: ExerciseInfoDTO.fromEntity(entity.exerciseInfo),
@@ -37,6 +40,7 @@ class ExerciseDTO {
     );
   }
 
+  /// no-doc.
   factory ExerciseDTO.fromMap(Map<String, dynamic> map) {
     return ExerciseDTO(
       exerciseInfo: ExerciseInfoDTO.fromSQLMap(
@@ -48,11 +52,17 @@ class ExerciseDTO {
     );
   }
 
+  /// no-doc.
   factory ExerciseDTO.fromJson(String source) =>
       ExerciseDTO.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  /// Information about exercise.
   final ExerciseInfoDTO exerciseInfo;
+
+  /// Modifiable sets.
   List<ExerciseSetDTO> sets;
 
+  /// no-doc.
   ExerciseDTO copyWith({
     ExerciseInfoDTO? exerciseInfo,
     List<ExerciseSetDTO>? sets,
@@ -63,6 +73,7 @@ class ExerciseDTO {
     );
   }
 
+  /// no-doc.
   ExerciseEntity toEntity() {
     return ExerciseEntity(
       exerciseInfo: exerciseInfo.toEntity(),
@@ -70,6 +81,7 @@ class ExerciseDTO {
     );
   }
 
+  /// Maps to SnakeCase.
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'exercise_info': exerciseInfo.toMap().toString(),
@@ -77,6 +89,7 @@ class ExerciseDTO {
     };
   }
 
+  /// Maps to backend SnakeCase version.
   Map<String, dynamic> toAnotherFuckingShit() {
     return <String, dynamic>{
       'exercise_id': exerciseInfo.id,
@@ -85,6 +98,7 @@ class ExerciseDTO {
     };
   }
 
+  /// Backend needs this representation.
   List<Map<String, num>> toShitList() {
     final list = <Map<String, num>>[];
 
@@ -99,6 +113,7 @@ class ExerciseDTO {
     return list;
   }
 
+  /// Maps to DB version.
   Map<String, dynamic> toFuckingShit() {
     return <String, dynamic>{
       'exerciseInfo': exerciseInfo.description,
@@ -108,18 +123,9 @@ class ExerciseDTO {
     };
   }
 
+  /// Maps to json.
   String toJson() => json.encode(toMap());
 
   @override
   String toString() => 'Exercise(exerciseInfo: $exerciseInfo, sets: $sets)';
-
-  @override
-  bool operator ==(covariant ExerciseDTO other) {
-    if (identical(this, other)) return true;
-
-    return other.exerciseInfo == exerciseInfo && listEquals(other.sets, sets);
-  }
-
-  @override
-  int get hashCode => exerciseInfo.hashCode ^ sets.hashCode;
 }

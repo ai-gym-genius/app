@@ -6,7 +6,9 @@ import 'package:gym_genius/core/data/repositories/user_repository_impl.dart';
 import 'package:gym_genius/di.dart';
 import 'package:gym_genius/theme/context_getters.dart';
 
+/// A page for user authentication with form fields and validation.
 class AuthPage extends StatefulWidget {
+  /// A page that provides a form for user authentication.
   const AuthPage({super.key});
 
   @override
@@ -273,7 +275,7 @@ class _AuthPageState extends State<AuthPage> {
             // Navigate to login page
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
+              MaterialPageRoute<dynamic>(
                 builder: (BuildContext context) => const _LoginPage(),
               ),
             );
@@ -299,17 +301,16 @@ class _AuthPageState extends State<AuthPage> {
     });
 
     try {
-      unawaited(
-        getIt<UserRepositoryImpl>().createUser(
-            name: _nameController.text.trim(),
-            surname: _surnameController.text.trim(),
-            password: _passwordController.text,
-            email: _emailController.text.trim(),
-            login: _loginController.text.trim()),
+      await getIt<UserRepositoryImpl>().createUser(
+        name: _nameController.text.trim(),
+        surname: _surnameController.text.trim(),
+        password: _passwordController.text,
+        email: _emailController.text.trim(),
+        login: _loginController.text.trim(),
       );
 
-      await Future.delayed(const Duration(milliseconds: 1203));
-    } catch (error) {
+      await Future<void>.delayed(const Duration(milliseconds: 1203));
+    } on Exception {
       // if (mounted) {
       //   _showErrorDialog(error.toString());
       // }
@@ -521,8 +522,8 @@ class _LoginPageState extends State<_LoginPage> {
           password: _passwordController.text,
         ),
       );
-      await Future.delayed(const Duration(milliseconds: 1500));
-    } catch (error) {
+      await Future<void>.delayed(const Duration(milliseconds: 1500));
+    } on Exception {
       // if (mounted) {
       //   _showErrorDialog(error.toString());
       // }

@@ -255,6 +255,8 @@ class _ExpandableExerciseTileState extends State<ExpandableExerciseTile> {
 
 /// Two Fields + Button that adds set
 class SetAdder extends StatefulWidget {
+  /// Builds expandable animated container where sets can be added via
+  /// [setAdderCallback].
   const SetAdder({
     required Duration duration,
     required this.isExpanded,
@@ -263,8 +265,16 @@ class SetAdder extends StatefulWidget {
   }) : _duration = duration;
 
   final Duration _duration;
+
+  /// Whether container is expanded or not.
+  ///
+  /// Controlled via outer layer, so have to pass.
   final bool isExpanded;
-  final Function(ExerciseSetEntity) setAdderCallback;
+
+  /// Callback when sets are added.
+  ///
+  /// Used in outer-layer for adding sets.
+  final void Function(ExerciseSetEntity) setAdderCallback;
 
   @override
   State<SetAdder> createState() => _SetAdderState();
@@ -304,7 +314,7 @@ class _SetAdderState extends State<SetAdder> {
                             });
                           },
                           decoration: getTextFieldDecoration(
-                            repsControllerHasError,
+                            hasError: repsControllerHasError,
                           ),
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(RegExp('[0-9]'))
@@ -329,7 +339,7 @@ class _SetAdderState extends State<SetAdder> {
                             });
                           },
                           decoration: getTextFieldDecoration(
-                            weightControllerHasError,
+                            hasError: weightControllerHasError,
                           ),
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(RegExp('[0-9]'))
@@ -397,13 +407,13 @@ class _SetAdderState extends State<SetAdder> {
   }
 
   /// Get decoration for CupertinoStyled TextField
-  BoxDecoration getTextFieldDecoration(bool hasError) {
+  BoxDecoration getTextFieldDecoration({required bool hasError}) {
     return BoxDecoration(
       color: context.colors.surface,
       border: Border.all(
         color: hasError
-            ? context.colors.danger!
-            : context.colors.onSurface!.withOpacity(0.2),
+            ? context.colors.danger
+            : context.colors.onSurface.withOpacity(0.2),
         width: 0,
       ),
       borderRadius: const BorderRadius.all(Radius.circular(5)),

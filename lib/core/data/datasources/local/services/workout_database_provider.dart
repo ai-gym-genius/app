@@ -2,9 +2,16 @@ import 'package:gym_genius/core/data/datasources/local/services/exercise_loader.
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+
+/// Provides access to the workout database and handles its initialization.
 class WorkoutDatabaseProvider {
+  /// Uses [exerciseLoader] for generating exerciseInfos and [databaseFactory]
   WorkoutDatabaseProvider(this.exerciseLoader, this.databaseFactory);
+
+  /// Loader service for ExerciseInfos.
   final JsonExerciseInfosLoader exerciseLoader;
+
+  /// Factory.
   final DatabaseFactory databaseFactory;
 
   static const _databaseName = 'workout.db';
@@ -12,6 +19,7 @@ class WorkoutDatabaseProvider {
 
   static Database? _database;
 
+  /// Always returns database.
   Future<Database> get database async => _database ??= await _initDB();
 
   Future<Database> _initDB() async {
@@ -102,7 +110,8 @@ class WorkoutDatabaseProvider {
     // Load them from the source
     final infos = await exerciseLoader.loadDTOEx();
 
-    // For each info we insert basic information, then muscleGroup and then we link it.
+    // For each info we insert basic information, then muscleGroup and then we 
+    // link it.
     for (final info in infos) {
       await db.insert(
         'exercise_infos',
