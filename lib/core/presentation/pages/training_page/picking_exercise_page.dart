@@ -76,7 +76,7 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
   Widget build(BuildContext context) {
     final heightOfWidget = MediaQuery.of(context).size.height - 150;
 
-    return BlocConsumer<TrainingBloc, TrainingState>(
+    return BlocListener<TrainingBloc, TrainingState>(
       listener: (context, state) {
         switch (state.addExerciseStatus) {
           case AddExerciseStatus.duplicate:
@@ -87,29 +87,25 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
             break;
         }
       },
-      builder: (context, state) {
-        final bloc = context.read<TrainingBloc>();
-
-        return SafeArea(
-          bottom: false,
-          child: CupertinoPopupSurface(
-            child: Material(
-              child: CupertinoPageScaffold(
-                child: SizedBox(
-                  height: heightOfWidget,
-                  child: CustomScrollView(
-                    slivers: [
-                      _buildNavBar(),
-                      _buildSearchingSegment(),
-                      _buildGrid(bloc),
-                    ],
-                  ),
+      child: SafeArea(
+        bottom: false,
+        child: CupertinoPopupSurface(
+          child: Material(
+            child: CupertinoPageScaffold(
+              child: SizedBox(
+                height: heightOfWidget,
+                child: CustomScrollView(
+                  slivers: [
+                    _buildNavBar(),
+                    _buildSearchingSegment(),
+                    _buildGrid(),
+                  ],
                 ),
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
@@ -222,7 +218,7 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
   //   );
   // }
 
-  Widget _buildGrid(TrainingBloc bloc) {
+  Widget _buildGrid() {
     final bottomPadding = MediaQuery.of(context).size.width / 4;
 
     return FutureBuilder(
@@ -262,7 +258,7 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
               ),
               itemBuilder: (context, val) {
                 final exerciseInfo = _visibleExercises[val];
-                return _buildExerciseContainer(exerciseInfo, bloc);
+                return _buildExerciseContainer(exerciseInfo);
               },
             ),
           );
@@ -277,9 +273,8 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
 
   Widget _buildExerciseContainer(
     ExerciseInfoEntity exerciseInfo,
-    TrainingBloc bloc,
   ) {
-    final focusedContainerHeight = MediaQuery.of(context).size.width / 1.5;
+    final bloc = context.read<TrainingBloc>();
 
     return CustomContextMenu(
       actions: [
@@ -301,96 +296,70 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
       ],
       // TODO: Fix taps on focused.
       child: GestureDetector(
-        onTap: () {
-          bloc.add(AddExercise(exerciseInfo));
-        },
+        onTap: () => bloc.add(AddExercise(exerciseInfo)),
 
-        // Container itself.
-        // TODO(chabanovx): fix image loading.
-        child: Container(
-          height: focusedContainerHeight,
-          width: focusedContainerHeight,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: context.colors.primaryLight,
-            image:
-                exerciseInfo.imagePath != null && exerciseInfo.imagePath != ''
-                    ? DecorationImage(
-                        image: AssetImage(exerciseInfo.imagePath!),
-                        fit: BoxFit.cover,
-                      )
-                    : null,
-          ),
-          alignment: Alignment.bottomLeft,
-
-          // Little Text with decoration.
-          child: Row(
+        // Image with exercise name.
+        child: ClipRRect(
+          borderRadius: BorderRadiusGeometry.circular(12),
+          child: Stack(
+            fit: StackFit.expand,
             children: [
-              Flexible(
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(4),
-                    ),
-                    color: context.colors.secondary.withAlpha(230),
-                  ),
-                  child: Text(
-                    style: context.txt.bodySmall.copyWith(
-                      decoration: TextDecoration.none,
-                    ),
-                    exerciseInfo.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
+              const ColoredBox(
+                color: CupertinoColors.tertiarySystemFill,
               ),
-              const SizedBox(width: 16),
+              if (exerciseInfo.imagePath != null &&
+                  exerciseInfo.imagePath!.isNotEmpty)
+                Image.asset(
+                  fit: BoxFit.cover,
+                  exerciseInfo.imagePath!,
+                  frameBuilder: (
+                    BuildContext context,
+                    Widget child,
+                    int? frame,
+                    bool wasLoaded,
+                  ) {
+                    if (wasLoaded) {
+                      return child;
+                    }
+                    return AnimatedOpacity(
+                      opacity: frame == null ? 0 : 1,
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.easeOut,
+                      child: child,
+                    );
+                  },
+                ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(4),
+                          ),
+                          color: context.colors.secondary.withAlpha(230),
+                        ),
+                        child: Text(
+                          style: context.txt.bodySmall.copyWith(
+                            decoration: TextDecoration.none,
+                          ),
+                          exerciseInfo.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                  ],
+                ),
+              )
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-/// Might be extracted to a different page.
-class CustomSegmentedControl extends StatefulWidget {
-  /// no-doc.
-  const CustomSegmentedControl({super.key});
-
-  @override
-  State<CustomSegmentedControl> createState() => _CustomSegmentedControlState();
-}
-
-class _CustomSegmentedControlState extends State<CustomSegmentedControl> {
-  int _selectedFilter = 1;
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoSegmentedControl<int>(
-      groupValue: _selectedFilter,
-      children: const <int, Widget>{
-        0: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: Text('Chest'),
-        ),
-        1: Padding(
-          padding: EdgeInsets.symmetric(),
-          child: Text('Back'),
-        ),
-        2: Padding(
-          padding: EdgeInsets.symmetric(),
-          child: Text('Legs'),
-        ),
-      },
-      onValueChanged: (value) {
-        setState(() {
-          _selectedFilter = value;
-        });
-      },
     );
   }
 }
