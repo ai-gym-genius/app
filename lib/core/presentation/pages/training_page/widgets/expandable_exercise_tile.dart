@@ -79,7 +79,7 @@ class _ExpandableExerciseTileState extends State<ExpandableExerciseTile> {
                   child: Icon(
                     CupertinoIcons.photo,
                     size: 64,
-                    color: context.colors.white.withOpacity(0.54),
+                    color: context.colors.white.withValues(alpha: 0.54),
                   ),
                 ),
               // Blur effect
