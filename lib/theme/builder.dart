@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gym_genius/theme/tokens/colors.dart';
 import 'package:gym_genius/theme/tokens/text.dart';
 
+/// Builder that adjusts for brightness.
 ThemeData buildTheme({
   required Brightness brightness,
   required AppColors colors,

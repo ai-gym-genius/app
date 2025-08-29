@@ -14,7 +14,7 @@ class Popups {
     TrainingBloc bloc,
     WorkoutEntity workout,
   ) {
-    showCupertinoModalPopup(
+    showCupertinoModalPopup<void>(
       context: context,
       builder: (context) => _TrainingSummaryCard(
         bloc: bloc,
@@ -23,8 +23,9 @@ class Popups {
     );
   }
 
+  /// Shows AI review page.
   static void showAIReview(BuildContext context, String reviewText) {
-    showCupertinoModalPopup(
+    showCupertinoModalPopup<void>(
       context: context,
       builder: (_) => _AIReviewSheet(text: reviewText),
     );
@@ -182,8 +183,6 @@ class _TrainingSummaryCard extends StatelessWidget {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                // ─── Icon / Activity indicator ───
-                                // Fixed box guarantees the widget keeps the same footprint
                                 SizedBox(
                                   width: 36,
                                   height: 36,

@@ -52,7 +52,7 @@ void main() {
       };
 
       final workout = WorkoutDTO.fromMap(jsonTraining);
-      print(workout);
+      expect(workout.exercises.length, 2);
     });
     test('Another casting test', () {
       final dynamic json = {
@@ -76,7 +76,7 @@ void main() {
       };
 
       final parsed = ExerciseDTO.fromMap(json as Map<String, dynamic>);
-      print(parsed);
+      expect(parsed.exerciseInfo.name, 'penis');
     });
   });
 }

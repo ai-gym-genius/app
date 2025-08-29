@@ -188,38 +188,39 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
         ),
       );
 
-  Widget _buildFilteringSegment() {
-    return Material(
-      type: MaterialType.transparency,
-      child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.transparent.withAlpha(100),
-          ),
-          height: 200,
-          width: 300,
-          child: DefaultTextStyle(
-            style: context.txt.body.copyWith(color: Colors.white),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Text('Pick Filtering Options'),
-                ),
-                Expanded(
-                  child: Placeholder(
-                    child: Text('COMING SOON'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // TODO: undoc when filtering added.
+  // Widget _buildFilteringSegment() {
+  //   return Material(
+  //     type: MaterialType.transparency,
+  //     child: Center(
+  //       child: Container(
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(12),
+  //           color: Colors.transparent.withAlpha(100),
+  //         ),
+  //         height: 200,
+  //         width: 300,
+  //         child: DefaultTextStyle(
+  //           style: context.txt.body.copyWith(color: Colors.white),
+  //           child: const Column(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             children: [
+  //               Padding(
+  //                 padding: EdgeInsets.all(16),
+  //                 child: Text('Pick Filtering Options'),
+  //               ),
+  //               Expanded(
+  //                 child: Placeholder(
+  //                   child: Text('COMING SOON'),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildGrid(TrainingBloc bloc) {
     final bottomPadding = MediaQuery.of(context).size.width / 4;
@@ -301,7 +302,6 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
       // TODO: Fix taps on focused.
       child: GestureDetector(
         onTap: () {
-          print('Added ex to bloc');
           bloc.add(AddExercise(exerciseInfo));
         },
 

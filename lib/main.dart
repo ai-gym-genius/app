@@ -12,7 +12,7 @@ void main() async {
   await Objectbox.init();
   await DioService().init();
 
-  setUpLocator(LaunchingType.development);
+  await setUpLocator(LaunchingType.development);
 
   runApp(const MainApp());
 }

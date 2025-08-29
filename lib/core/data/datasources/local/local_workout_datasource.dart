@@ -1,22 +1,43 @@
+// This code is mostly fucking shit and should be rewritten.
 import 'package:gym_genius/core/data/datasources/local/services/workout_database_provider.dart';
 import 'package:gym_genius/core/data/models/exercise_dto.dart';
 import 'package:gym_genius/core/data/models/exercise_info_dto.dart';
 import 'package:gym_genius/core/data/models/exercise_set_dto.dart';
 import 'package:gym_genius/core/data/models/workout_dto.dart';
 
+/// A datasource for local workout operations.
 abstract class LocalWorkoutDatasource {
+  /// Saves a workout to the local datasource.
   Future<void> saveWorkout(WorkoutDTO workout);
+
+  /// Deletes a workout from the local datasource.
   Future<void> deleteWorkout(int id);
+
+  /// Updates a workout in the local datasource.
   Future<void> updateWorkout(WorkoutDTO workout);
+
+  /// Gets a workout from the local datasource by id.
   Future<WorkoutDTO?> getWorkoutById(int id);
+
+  /// Gets all workouts from the local datasource.
   Future<List<WorkoutDTO>> getAllWorkouts();
+
+  /// Loads all exercise infos from the local datasource.
   Future<List<ExerciseInfoDTO>> loadInfos();
+
+  /// Marks an exercise info as favorite.
   Future<void> markInfoFavorite();
+
+  /// Unmarks an exercise info as favorite.
   Future<void> unmarkInfoFavorite();
 }
 
+/// A datasource for local workout operations.
 class SqfliteDatabase implements LocalWorkoutDatasource {
+  /// Constructor for the [SqfliteDatabase] class.
   SqfliteDatabase(this.dbProvider);
+
+  /// The database provider for the [SqfliteDatabase] class.
   final WorkoutDatabaseProvider dbProvider;
 
   @override
@@ -43,8 +64,8 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
         // into List<String>?, so it can be passed to .fromMap
         final mutableRow = Map<String, dynamic>.from(row);
         final mg = mutableRow['muscle_groups'] as String?;
-        // Change problematic field
-        mutableRow['muscle_groups'] = mg != null ? mg.split(',') : [];
+        // Change problematic field.
+        mutableRow['muscle_groups'] = mg != null ? mg.split(',') : <dynamic>[];
         return ExerciseInfoDTO.fromSQLMap(mutableRow);
       },
     ).toList();
@@ -86,16 +107,15 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
     final db = await dbProvider.database;
 
     return db.transaction<List<WorkoutDTO>>((txn) async {
-      // ── 1. header rows ──────────────────────────────────────────────────────
+      // Header rows.
       final workoutRows = await txn.query(
         'workouts',
         orderBy: 'start_time DESC', // newest first (optional)
       );
       if (workoutRows.isEmpty) return const [];
-
       final workoutIds = workoutRows.map<int>((r) => r['id']! as int).toList();
 
-      // ── 2. exercises for *all* workouts ─────────────────────────────────────
+      // Exercises for all workouts.
       final exerciseRows = await txn.query(
         'exercises',
         where:
@@ -103,6 +123,7 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
         whereArgs: workoutIds,
       );
 
+      // Exercise info ids.
       final exercisesByWorkout = <int, List<Map<String, Object?>>>{};
       final exerciseIds = <int>[];
       final exerciseInfoIds = <int>[];
@@ -115,7 +136,6 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
         exerciseInfoIds.add(r['exercise_info_id']! as int);
       }
 
-      // ── 3. exercise_infos + muscle groups (batch) ──────────────────────────
       final infosMap = <int, ExerciseInfoDTO>{};
 
       if (exerciseInfoIds.isNotEmpty) {
@@ -154,12 +174,14 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
         }
       }
 
-      // ── 4. sets for all exercises (batch) ──────────────────────────────────
+      // Sets for all exercises.
       final setsByExercise = <int, List<ExerciseSetDTO>>{};
       if (exerciseIds.isNotEmpty) {
         final setRows = await txn.query(
           'exercise_sets',
           where:
+              // Reason: query.
+              // ignore: lines_longer_than_80_chars
               'exercise_id IN (${List.filled(exerciseIds.length, '?').join(',')})',
           whereArgs: exerciseIds,
         );
@@ -175,17 +197,17 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
         }
       }
 
-      // ── 5. assemble DTOs workout-by-workout ────────────────────────────────
       final workouts = <WorkoutDTO>[];
 
       for (final w in workoutRows) {
         final wid = w['id']! as int;
 
         final exercises = <ExerciseDTO>[
-          for (final ex in (exercisesByWorkout[wid] ?? const []))
+          for (final Map<String, Object?> ex
+              in (exercisesByWorkout[wid] ?? const []))
             ExerciseDTO(
-              exerciseInfo: infosMap[ex['exercise_info_id'] as int]!,
-              sets: setsByExercise[ex['id'] as int] ?? const [],
+              exerciseInfo: infosMap[ex['exercise_info_id']! as int]!,
+              sets: setsByExercise[ex['id']! as int] ?? const [],
             ),
         ];
 
@@ -221,13 +243,14 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
       if (workoutRows.isEmpty) return null;
       final w = workoutRows.first;
 
-      // ALL EXERCISES FOR THAT WORKOUT
+      // All exercises for that workout.
       final exerciseRows = await txn.query(
         'exercises',
         where: 'workout_id = ?',
         whereArgs: [id],
       );
 
+      // Exercise ids.
       final exerciseIds = exerciseRows.map((r) => r['id']! as int).toList();
       final exerciseInfoIds =
           exerciseRows.map((r) => r['exercise_info_id']! as int).toList();
@@ -268,12 +291,14 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
         }
       }
 
-      // ── 4. load all sets for all exercises in one go ────────────────────────
+      // Load sets for all exercises.
       final setsByExercise = <int, List<ExerciseSetDTO>>{};
       if (exerciseIds.isNotEmpty) {
         final setRows = await txn.query(
           'exercise_sets',
           where:
+              // Reason: It's a query.
+              // ignore: lines_longer_than_80_chars
               'exercise_id IN (${List.filled(exerciseIds.length, '?').join(',')})',
           whereArgs: exerciseIds,
         );
@@ -289,7 +314,7 @@ class SqfliteDatabase implements LocalWorkoutDatasource {
         }
       }
 
-      // ── 5. assemble DTO objects ─────────────────────────────────────────────
+      // Assemble DTO objects.
       final exercises = <ExerciseDTO>[];
       for (final r in exerciseRows) {
         final exId = r['id']! as int;

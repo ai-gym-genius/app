@@ -78,7 +78,7 @@ class ExerciseInfoDTO extends Equatable {
   final int id;
 
   /// Name of exInfo.
-  /// 
+  ///
   /// Example: bench_press.
   final String name;
 
@@ -89,7 +89,7 @@ class ExerciseInfoDTO extends Equatable {
   final String? imagePath;
 
   /// Url of exInfo.
-  /// 
+  ///
   /// Not used at the moment, there might be video or something.
   final String? url;
 
@@ -127,6 +127,8 @@ class ExerciseInfoDTO extends Equatable {
 
   @override
   String toString() {
+    // reason: easier to read.
+    // ignore: lines_longer_than_80_chars
     return 'ExerciseInfoDto(id: $id, name: $name, description: $description, imagePath: $imagePath, muscleGroups: $muscleGroups)';
   }
 

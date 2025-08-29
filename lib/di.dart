@@ -13,40 +13,45 @@ import 'package:gym_genius/core/network/dio_service.dart';
 import 'package:gym_genius/core/presentation/bloc/training_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 
+/// Public locator.
 final GetIt getIt = GetIt.instance;
 
 /// Indicates whether to use mock versions or not.
 enum LaunchingType {
+  /// Development mode.
   development,
+
+  /// Production mode.
   production,
 }
 
+/// Sets up the locator for the app.
 Future<void> setUpLocator(LaunchingType type) async {
   // Database related.
-  getIt.registerSingleton<JsonExerciseInfosLoader>(
+  getIt..registerSingleton<JsonExerciseInfosLoader>(
     JsonExerciseInfosLoader(),
-  );
-  getIt.registerLazySingleton<DatabaseFactory>(() => databaseFactory);
-  getIt.registerLazySingleton<WorkoutDatabaseProvider>(
-      () => WorkoutDatabaseProvider(getIt(), getIt()));
+  )
+  ..registerLazySingleton<DatabaseFactory>(() => databaseFactory)
+  ..registerLazySingleton<WorkoutDatabaseProvider>(
+      () => WorkoutDatabaseProvider(getIt(), getIt()))
 
   // Register Datasources
   // For local - dbProvider
   // For remote - apiProvider
-  getIt.registerLazySingleton<LocalWorkoutDatasource>(
+  ..registerLazySingleton<LocalWorkoutDatasource>(
     () => SqfliteDatabase(getIt<WorkoutDatabaseProvider>()),
-  );
+  )
 
-  getIt.registerLazySingleton(DioService.new);
-  getIt.registerLazySingleton<RemoteWorkoutDatasource>(
+  ..registerLazySingleton(DioService.new)
+  ..registerLazySingleton<RemoteWorkoutDatasource>(
     () => APIWorkoutDatasource(getIt<DioService>()),
-  );
-  getIt.registerLazySingleton(UserCredentials.new);
-  getIt.registerLazySingleton(
-      () => UserRepositoryImpl(getIt<UserCredentials>(), getIt<DioService>()));
+  )
+  ..registerLazySingleton(UserCredentials.new)
+  ..registerLazySingleton(
+      () => UserRepositoryImpl(getIt<UserCredentials>(), getIt<DioService>()))
 
   // Register Repositories
-  getIt.registerLazySingleton<WorkoutRepository>(
+  ..registerLazySingleton<WorkoutRepository>(
     () {
       // switch (type) {
       // case LaunchingType.development:
@@ -56,13 +61,13 @@ Future<void> setUpLocator(LaunchingType type) async {
           getIt<LocalWorkoutDatasource>(), getIt<RemoteWorkoutDatasource>());
       // }
     },
-  );
-  getIt.registerLazySingleton<ExInfosRepository>(
+  )
+  ..registerLazySingleton<ExInfosRepository>(
     ExInfosRepositoryImpl.new,
-  );
+  )
 
   // Blocs
-  getIt.registerFactory<TrainingBloc>(
+  ..registerFactory<TrainingBloc>(
     () => TrainingBloc(workoutRepository: getIt<WorkoutRepository>()),
   );
 }

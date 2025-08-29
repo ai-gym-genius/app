@@ -144,7 +144,7 @@ class _StatsPageState extends State<StatsPage> {
                   horizontalInterval: 15,
                   getDrawingHorizontalLine: (value) {
                     return FlLine(
-                      color: colors.onSurface!.withOpacity(0.3),
+                      color: colors.onSurface.withOpacity(0.3),
                       strokeWidth: 1,
                     );
                   },
@@ -198,7 +198,7 @@ class _StatsPageState extends State<StatsPage> {
                 ),
                 borderData: FlBorderData(
                   show: true,
-                  border: Border.all(color: colors.onSurface!.withOpacity(0.3)),
+                  border: Border.all(color: colors.onSurface.withOpacity(0.3)),
                 ),
                 minX: 0,
                 maxX: (spots.length - 1).toDouble(),
