@@ -1,0 +1,95 @@
+Generate picture. Strictly follow the description below:
+{
+
+"image": {
+  "subject": "Human anatomical figure performing a seated triceps push-down machine exercise",
+  "pose": {
+    "body_position": "seated on a dip machine with torso leaning slightly forward, back not fully pressed against the pad",
+    "exercise_action": "pressing the machine handles downward alongside the torso by extending the elbows",
+    "arms": "elbows bent at approximately 90 degrees in the starting position, moving to near full extension at the sides of the body, hands gripping the machine handles firmly",
+    "legs": "hips and knees flexed at about 90 degrees, feet planted firmly on the foot platform for stability",
+    "head": "slightly tilted downward, eyes focused forward"
+  },
+  "anatomy": {
+    "muscle_exposure": "skinless anatomical figure showing muscle fibers and tendons",
+    "highlighted_muscles": [
+      "triceps brachii",
+      "anterior deltoid",
+      "pectoralis major (sternal head)",
+      "latissimus dorsi"
+    ],
+    "detail_level": "high anatomical accuracy with clear striations and tendons"
+  },
+  "equipment": {
+  "machine": "seated triceps dip / push-down machine designed for isolating the triceps",
+  "components": {
+    "seat": "padded seat with flat cushion, positioned at hip height",
+    "back_support": "short vertical back pad providing minimal torso support",
+    "handles": "two parallel handles positioned at the sides of the torso, attached to levers; handles move downward during the exercise",
+    "lever_arms": "mechanical lever arms connected to the handles, pivoting downward when pushed",
+    "foot_platform": "horizontal padded rollers or foot bar in front of the seat, used to lock thighs and keep the body stable",
+    "weight_stack": "vertical weight stack behind or to the side of the machine, connected to the lever arms via pulleys and cables",
+    "frame": "rectangular metallic frame with stable base resting on the floor"
+  },
+  "description": "The user sits on the padded seat, places feet under the foot platform to secure the legs, grips the parallel side handles, and pushes them downward by extending the elbows against resistance provided by the weight stack."
+}
+
+}
+
+  ,
+  "style": {
+    "rendering": "3D photorealistic anatomical illustration",
+    "focus": "muscle anatomy and biomechanics",
+    "color_palette": {
+      "muscles": "red with white tendons",
+      "equipment": "black and metallic gray",
+      "background": "neutral or transparent"
+    },
+    "lighting": "studio lighting with soft shadows",
+    "texture": "highly detailed, smooth, realistic muscle fibers",
+    "perspective": "frontal full-body view"
+  },
+  "composition": {
+    "framing": "subject centered, full body visible",
+    "focus_area": "shoulder muscles under tension during exercise",
+    "depth_of_field": "moderate, background unobtrusive",
+    "symmetry": "balanced view of arms and dumbbells"
+  },
+  "background": {
+  "environment": "neutral indoor studio setup",
+  "color": "light gray to off-white gradient",
+  "lighting": "soft, even studio lighting with minimal shadows",
+  "distractions": "none (clean background, no extra objects)",
+  "floor": "smooth, seamless surface blending into backdrop",
+  "depth": "shallow, keeping focus entirely on subject and equipment",
+  "mood": "clinical, educational, professional"
+},
+
+  "technical": {
+    "resolution": "high (suitable for fitness/anatomical illustration)",
+    "intended_use": [
+      "fitness education",
+      "biomechanics analysis",
+      "strength training illustration"
+    ]
+  },
+  "generation_parameters": {
+    "prompt_keywords": [
+      "3D anatomical illustration",
+      "dumbbell lateral raise exercise",
+      "exposed muscle fibers",
+      "shoulder anatomy",
+      "studio lighting",
+      "fitness anatomy"
+    ],
+    "negative_prompt_keywords": [
+      "cartoon",
+      "low detail",
+      "blurry",
+      "clothing",
+      "skin-covered"
+    ],
+    "style_strength": "high realism",
+    "render_quality": "ultra high"
+  },
+}

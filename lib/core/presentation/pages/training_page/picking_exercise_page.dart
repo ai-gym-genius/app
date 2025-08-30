@@ -184,40 +184,6 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
         ),
       );
 
-  // TODO: undoc when filtering added.
-  // Widget _buildFilteringSegment() {
-  //   return Material(
-  //     type: MaterialType.transparency,
-  //     child: Center(
-  //       child: Container(
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(12),
-  //           color: Colors.transparent.withAlpha(100),
-  //         ),
-  //         height: 200,
-  //         width: 300,
-  //         child: DefaultTextStyle(
-  //           style: context.txt.body.copyWith(color: Colors.white),
-  //           child: const Column(
-  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //             children: [
-  //               Padding(
-  //                 padding: EdgeInsets.all(16),
-  //                 child: Text('Pick Filtering Options'),
-  //               ),
-  //               Expanded(
-  //                 child: Placeholder(
-  //                   child: Text('COMING SOON'),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Widget _buildGrid() {
     final bottomPadding = MediaQuery.of(context).size.width / 4;
 
@@ -275,6 +241,7 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
     ExerciseInfoEntity exerciseInfo,
   ) {
     final bloc = context.read<TrainingBloc>();
+    final boxSize = MediaQuery.of(context).size.width / 1.5;
 
     return CustomContextMenu(
       actions: [
@@ -301,62 +268,66 @@ class _PickingExercisePageState extends State<PickingExercisePage> {
         // Image with exercise name.
         child: ClipRRect(
           borderRadius: BorderRadiusGeometry.circular(12),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              const ColoredBox(
-                color: CupertinoColors.tertiarySystemFill,
-              ),
-              if (exerciseInfo.imagePath != null &&
-                  exerciseInfo.imagePath!.isNotEmpty)
-                Image.asset(
-                  fit: BoxFit.cover,
-                  exerciseInfo.imagePath!,
-                  frameBuilder: (
-                    BuildContext context,
-                    Widget child,
-                    int? frame,
-                    bool wasLoaded,
-                  ) {
-                    if (wasLoaded) {
-                      return child;
-                    }
-                    return AnimatedOpacity(
-                      opacity: frame == null ? 0 : 1,
-                      duration: const Duration(milliseconds: 800),
-                      curve: Curves.easeOut,
-                      child: child,
-                    );
-                  },
+          child: SizedBox(
+            width: boxSize,
+            height: boxSize,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                const ColoredBox(
+                  color: CupertinoColors.tertiarySystemFill,
                 ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(4),
+                if (exerciseInfo.imagePath != null &&
+                    exerciseInfo.imagePath!.isNotEmpty)
+                  Image.asset(
+                    fit: BoxFit.cover,
+                    exerciseInfo.imagePath!,
+                    frameBuilder: (
+                      BuildContext context,
+                      Widget child,
+                      int? frame,
+                      bool wasLoaded,
+                    ) {
+                      if (wasLoaded) {
+                        return child;
+                      }
+                      return AnimatedOpacity(
+                        opacity: frame == null ? 0 : 1,
+                        duration: const Duration(milliseconds: 800),
+                        curve: Curves.easeOut,
+                        child: child,
+                      );
+                    },
+                  ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(4),
+                            ),
+                            color: context.colors.secondary.withAlpha(230),
                           ),
-                          color: context.colors.secondary.withAlpha(230),
-                        ),
-                        child: Text(
-                          style: context.txt.bodySmall.copyWith(
-                            decoration: TextDecoration.none,
+                          child: Text(
+                            style: context.txt.bodySmall.copyWith(
+                              decoration: TextDecoration.none,
+                            ),
+                            exerciseInfo.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          exerciseInfo.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 16),
-                  ],
-                ),
-              )
-            ],
+                      const SizedBox(width: 16),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

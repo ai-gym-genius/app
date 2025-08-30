@@ -88,28 +88,28 @@
         "name": "Leg-Curls",
         "description": "An isolation exercise that targets the hamstrings using a leg curl machine.",
         "muscleGroup": ["Legs"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/leg_curls.webp"
     },
     {
         "id": 14,
         "name": "Bulgarian Split Squats",
         "description": "A unilateral leg exercise that targets the quads, glutes, and hamstrings.",
         "muscleGroup": ["Legs"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/bulgarian_split_squats.webp"
     },
     {
         "id": 15,
         "name": "Barbell Curls",
         "description": "An isolation exercise that targets the biceps using a barbell.",
         "muscleGroup": ["Biceps"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/barbell_curls.webp"
     },
     {
         "id": 16,
         "name": "Hammer Curls",
         "description": "A bicep exercise performed with dumbbells, targeting the brachialis and forearms.",
         "muscleGroup": ["Biceps"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/hammer_curls.webp"
     },
     {
         "id": 17,
@@ -123,42 +123,42 @@
         "name": "Preacher Curls",
         "description": "An isolation bicep exercise performed on a preacher bench to minimize momentum.",
         "muscleGroup": ["Biceps"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/preacher_curls.webp"
     },
     {
         "id": 19,
         "name": "Concentration Curls",
         "description": "An isolation bicep exercise performed seated with a dumbbell.",
         "muscleGroup": ["Biceps"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/concentration_curls.webp"
     },
     {
         "id": 20,
         "name": "Push Down Machine",
         "description": "A tricep isolation exercise performed using a cable machine.",
         "muscleGroup": ["Triceps"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/push_down_machine.webp"
     },
     {
         "id": 21,
         "name": "Overhead Barbell Extension",
         "description": "A tricep exercise performed with a barbell overhead to target the long head of the tricep.",
         "muscleGroup": ["Triceps"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/overhead_barbell_extension.webp"
     },
     {
         "id": 22,
         "name": "Overhead Dumbbell Extension",
         "description": "A tricep exercise performed with a dumbbell overhead to target the long head of the tricep.",
         "muscleGroup": ["Triceps"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/overhead_dumbbell_extension.webp"
     },
     {
         "id": 23,
         "name": "Close Grip Bench Press",
         "description": "A compound exercise that targets the triceps and chest.",
         "muscleGroup": ["Chest", "Triceps"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/close_grip_bench_press.webp"
     },
     {
         "id": 24,
@@ -172,21 +172,21 @@
         "name": "Front Raises",
         "description": "An isolation exercise that targets the front deltoids.",
         "muscleGroup": ["Shoulders"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/front_raises.webp"
     },
     {
         "id": 26,
         "name": "Lateral Raise",
         "description": "An isolation exercise that targets the lateral deltoids.",
         "muscleGroup": ["Shoulders"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/lateral_raises.webp"
     },
     {
         "id": 27,
-        "name": "Cable Pulls",
-        "description": "A shoulder exercise performed with a cable machine to target the rear deltoids.",
+        "name": "Cable Lateral Raise",
+        "description": "A shoulder exercise performed with a cable machine to target the lateral deltoids.",
         "muscleGroup": ["Shoulders"],
-        "imagePath": ""
+        "imagePath": "assets/exercise_pictures/cable_lateral_raises.webp"
     },
     {
         "id": 28,
